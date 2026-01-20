@@ -1,0 +1,15 @@
+{
+  "name": "WDIO_Bal",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^9.23.2",
+    "@wdio/cli": "^9.23.2",
+    "@wdio/cucumber-framework": "^9.23.2",
+    "@wdio/local-runner": "^9.23.2",
+    "@wdio/spec-reporter": "^9.23.2",
+    "allure-commandline": "^2.36.0"
+  },
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js"
+  }
+}
