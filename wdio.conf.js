@@ -43,7 +43,7 @@ export const config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -84,7 +84,7 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    // baseUrl: 'http://localhost:8080',
+    baseUrl: 'https://www.saucedemo.com',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -123,12 +123,25 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters:[
+    "spec",
+    ["allure", {
+    outputDir: "allure-results",
+    disableWebdriverStepsReporting: true,
+    disableWebdriverScreenshotsReporting: false
+  }]
+],
+    afterStep: async function (step, scenario, result) {
+  if (!result.passed) {
+    await browser.takeScreenshot();
+  }
+},
 
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/steps.js'],
+         require: ["./step-definitions/**/*.js","./features/step-definitions/**/*.js"
+         ],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
