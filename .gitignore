@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# allure reports
+allure-results/
+allure-report/
+
+# logs
+logs/
+*.log
+
+# environment
+.env
+
+# OS
+.DS_Store
+
+# editor
+.vscode/
